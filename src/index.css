@@ -50,3 +50,101 @@ img {
 p[role="alert"] {
   color: red;
 }
+
+#reservations {
+  display: grid;
+  gap: 0.5rem;
+}
+
+li.reservation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #eee;
+  padding: 0.5rem;
+}
+#books {
+  display: grid;
+  gap: 1rem;
+  list-style: none;
+}
+
+li.book {
+  display: grid;
+  grid-template-columns: 10ch 1fr;
+  gap: 1ch;
+  background: #eee;
+  padding: 0.5rem;
+}
+
+li.book figure {
+  height: 6lh;
+}
+
+li.book .author {
+  font-weight: bold;
+}
+
+#book {
+  display: grid;
+  gap: 1ch;
+}
+
+#book figure {
+  max-height: 50vh;
+}
+
+#book section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+@media (width >= 450px) {
+  #book {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  #book figure {
+    align-items: start;
+  }
+}
+
+form#search {
+  grid-template-columns: 1fr 10ch;
+  margin-bottom: 0.25rem;
+}
+
+form#search label {
+  grid-template-columns: auto 1fr;
+}
+#navbar {
+  display: flex;
+  gap: 1ch;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #ddd;
+}
+
+#navbar nav {
+  display: flex;
+  gap: 1ch;
+}
+
+#navbar #brand {
+  display: flex;
+  gap: 1ch;
+  align-items: center;
+  font-weight: bold;
+}
+
+#navbar #brand img {
+  height: 1.5lh;
+}
+
+@media (width <= 400px) {
+  #navbar #brand p {
+    display: none;
+  }
+}

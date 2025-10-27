@@ -1,25 +1,32 @@
-import { Route, Routes } from "react-router";
-
-import Account from "./account/Account";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
-import Book from "./books/Book";
-import Books from "./books/Books";
-import Error404 from "./Error404";
-import Layout from "./layout/Layout";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import BookList from "./components/BookList";
+import SingleBook from "./components/SingleBook";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import Account from "./components/Account";
 
 export default function App() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    if (savedToken) {
+      setToken(savedToken);
+    }
+  }, []);
+
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<Books />} />
-        <Route path="/books" element={<Books />} />
-        <Route path="/books/:id" element={<Book />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Error404 />} />
-      </Route>
-    </Routes>
+    <Router>
+      <Navigation token={token} setToken={setToken} />
+      <Routes>
+        <Route path="/" element={<BookList />} />
+        <Route path="/books/:id" element={<SingleBook token={token} />} />
+        <Route path="/register" element={<Register setToken={setToken} />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/account" element={<Account token={token} />} />
+      </Routes>
+    </Router>
   );
 }
